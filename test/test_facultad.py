@@ -2,6 +2,7 @@ import unittest
 from flask import current_app
 from app import create_app
 from app.models import Facultad
+from app.services.facultad_service import FacultadService
 import os
 
 class FacultadTestCase(unittest.TestCase):
@@ -24,9 +25,10 @@ class FacultadTestCase(unittest.TestCase):
     def test_facultad_busqueda(self):
         facultad = self.__nuevaFacultad()
         FacultadService.crear_facultad(facultad)
-        FacultadTestCase.busqueda_por_id(facultad.id)
-        self.assertIsNotNone(facultad)
-        self.assertEqual(facultad.nombre, "Facultad de Ciencias Exactas")
+        facultad_encontrada = FacultadService.buscar_por_id(facultad.id)
+        self.assertIsNotNone(facultad_encontrada)
+        self.assertEqual(facultad_encontrada.nombre, "Facultad de Ciencias Exactas")
+
 
     def __nuevaFacultad(self):
         facultad=Facultad()
