@@ -1,15 +1,36 @@
+version: "3.8"
 services:
-    estructura:
-        image: flask-sysacad:v1.0.0
-        networks:
-          - mired
-        ports:
-          - 5000:5000
-        environment:
-          - FLASK_CONTEXT=${FLASK_CONTEXT}
-          - SQLALCHEMY_TRACK_MODIFICATIONS=${SQLALCHEMY_TRACK_MODIFICATIONS}  
-          - SQLALCHEMY_RECORD_QUERIES=${SQLALCHEMY_RECORD_QUERIES}
-          - PROD_DATABASE_URI=${PROD_DATABASE_URI}
+  estructura:
+    image: flask-sysacad:v1.0.0
+    networks:
+      - mired
+    ports:
+      - 5000:5000
+    depends_on:
+      - postgres
+    environment:
+      - FLASK_CONTEXT=${FLASK_CONTEXT}
+      - SQLALCHEMY_TRACK_MODIFICATIONS=${SQLALCHEMY_TRACK_MODIFICATIONS}  
+      - SQLALCHEMY_RECORD_QUERIES=${SQLALCHEMY_RECORD_QUERIES}
+      - PROD_DATABASE_URI=postgresql://pprats:naranja@postgres:5432/SYSACAD  # O el que estés usando
+
+  postgres:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: pprats
+      POSTGRES_PASSWORD: naranja
+      POSTGRES_DB: SYSACAD
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - mired
+
 networks:
-    mired:
-        external: true
+  mired:
+    external: true
+
+volumes:
+  pgdata:
