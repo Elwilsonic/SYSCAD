@@ -1,6 +1,6 @@
 import unittest
 from flask import current_app
-from app import create_app
+from app import create_app, db  # Asegurate de importar db desde app
 from app.models import Facultad
 from app.services.facultad_service import FacultadService
 import os
@@ -12,8 +12,14 @@ class FacultadTestCase(unittest.TestCase):
         self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
+        # Crear las tablas antes de cada test
+        db.create_all()  
 
     def tearDown(self):
+        # Limpiar la sesión
+        db.session.remove() 
+         # Eliminar las tablas al finalizar cada test     
+        db.drop_all()            
         self.app_context.pop()
 
     def test_facultad_creation(self):
@@ -29,9 +35,8 @@ class FacultadTestCase(unittest.TestCase):
         self.assertIsNotNone(facultad_encontrada)
         self.assertEqual(facultad_encontrada.nombre, "Facultad de Ciencias Exactas")
 
-
     def __nuevaFacultad(self):
-        facultad=Facultad()
+        facultad = Facultad()
         facultad.nombre = "Facultad de Ciencias Exactas"
         facultad.abreviatura = "FCE"
         facultad.directorio = "Ciencias Exactas"
@@ -41,16 +46,8 @@ class FacultadTestCase(unittest.TestCase):
         facultad.domicilio = "Calle 123"
         facultad.telefono = "123456789"
         facultad.contacto = "Juan Perez"
-        facultad.email ="abc@gmail.com"
+        facultad.email = "abc@gmail.com"
         return facultad
-    """
-    def test_crear_facultad(self):
-        facultad = self.__nuevaFacultad()
-        FacultadService.crear_facultad(facultad)
-        self.assertIsNotNone(facultad)
-        self.assertIsNotNone(facultad.id)
-        self.assertGreaterEqual(facultad.id, 1)
-        self.assertEqual(facultad.nombre, "Facultad de Ciencias Exactas")
-    """
+
 if __name__ == "__main__":
     unittest.main()
