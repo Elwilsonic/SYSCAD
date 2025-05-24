@@ -5,3 +5,4 @@ from .tipo_dedicacion import TipoDedicacion
 from .facultad import Facultad
 from .alumno import Alumno
 from .tipodocumento import TipoDocumento
+from .grado import Grado
