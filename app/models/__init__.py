@@ -6,3 +6,4 @@ from .facultad import Facultad
 from .alumno import Alumno
 from .tipodocumento import TipoDocumento
 from .grado import Grado
+from .grupo import Grupo
