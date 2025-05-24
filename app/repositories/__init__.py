@@ -1,1 +1,2 @@
 from .facultad_repositorio import FacultadRepository
+from .alumno_repositorio import AlumnoRepository
