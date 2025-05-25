@@ -2,3 +2,4 @@ from .facultad_repositorio import FacultadRepository
 from .alumno_repositorio import AlumnoRepository
 from .tipodocumento_repositorio import TipoDocumentoRepository
 from .grado_repositorio import GradoRepository
+from .departamento_repositorio import DepartamentoRepository
