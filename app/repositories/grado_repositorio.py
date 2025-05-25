@@ -50,7 +50,8 @@ class GradoRepository:
         :param id: ID del grado a borrar.
         :return: Objeto Grado borrado o None si no se encuentra.
         """
-        grado = db.session.query(grado).filter_by(id=id).first()
+        grado = db.session.query(Grado).filter_by(id=id).first()
+        
         if not grado:
             return None
         db.session.delete(grado)
