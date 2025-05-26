@@ -10,3 +10,4 @@ from .grupo import Grupo
 from .departamento import Departamento
 from .especialidad import Especialidad
 from .tipoespecialidad import TipoEspecialidad
+from .materia import Materia
