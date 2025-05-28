@@ -13,3 +13,4 @@ from .tipoespecialidad import TipoEspecialidad
 from .materia import Materia
 from .plan import Plan
 from .orientacion import Orientacion
+from .universidad import Universidad
