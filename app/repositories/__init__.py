@@ -5,3 +5,4 @@ from .grado_repositorio import GradoRepository
 from .departamento_repositorio import DepartamentoRepository
 from .especialidad_repositorio import EspecialidadRepository
 from .tipoespecialidad_repositorio import TipoEspecialidadRepository
+from .universidad_repositorio import UniversidadRepository
