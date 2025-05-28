@@ -5,3 +5,4 @@ from .grado_service import GradoService
 from .departamento_service import DepartamentoService
 from .especialidad_service import EspecialidadService
 from .tipoespecialidad_service import TipoEspecialidadService
+from .universidad_service import UniversidadService
