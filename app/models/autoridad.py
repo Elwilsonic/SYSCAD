@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from app.models import Cargo
 
 from app import db
 
@@ -11,5 +10,5 @@ class Autoridad(db.Model):
     telefono: str = db.Column(db.String(20), nullable=True)
     email: str = db.Column(db.String(100), nullable=True)
 
-    cargo_id: int = db.Column(db.Integer, db.Foreignkey('cargos.id'))
+    cargo_id: int = db.Column(db.Integer, db.ForeignKey('cargos.id'))
     cargo = db.relationship('Cargo')
