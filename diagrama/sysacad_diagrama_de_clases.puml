@@ -1,6 +1,6 @@
 @startuml Diagrama de Clases de sysacad
-package "Sistema Académico"{
-    package "Personas"{
+package "Sistema Académico" {
+    package "Personas" {
         class Alumno {
             - apellido: str
             - nombre: str
@@ -8,7 +8,6 @@ package "Sistema Académico"{
             - tipoDocumento: TipoDocumento
             - fechaNacimiento: str
             // “M”= Masculino, “F”=Femenino
-            - sexo: str
             - nroLegajo: int
             - fechaIngreso: date
         }
@@ -18,6 +17,12 @@ package "Sistema Académico"{
             LibretaCivica
             LibretaEnrolamiento
             Pasaporte
+        }
+
+        class Usuario {
+            - username: str
+            - password: str
+            - activated: str
         }
     }
 
