@@ -8,3 +8,4 @@ from .tipoespecialidad_service import TipoEspecialidadService
 from .universidad_service import UniversidadService
 from .area_service import AreaService
 from .grupo_service import GrupoService
+from .plan_service import PlanService
