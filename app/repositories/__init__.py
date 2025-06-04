@@ -10,3 +10,4 @@ from .area_repositorio import AreaRepository
 from .grupo_repositorio import GrupoRepository
 from .plan_repositorio import PlanRepository
 from .materia_repositorio import MateriaRepository
+from .orientacion_repositorio import OrientacionRepository
