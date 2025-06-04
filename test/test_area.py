@@ -3,7 +3,7 @@ import os
 from flask import current_app
 from app import create_app, db
 from app.models.area import Area
-from app.services.area_service import AreaService
+from app.services import AreaService
 
 class AreaTestCase(unittest.TestCase):
     def setUp(self):
