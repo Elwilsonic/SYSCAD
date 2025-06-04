@@ -6,3 +6,4 @@ from .departamento_repositorio import DepartamentoRepository
 from .especialidad_repositorio import EspecialidadRepository
 from .tipoespecialidad_repositorio import TipoEspecialidadRepository
 from .universidad_repositorio import UniversidadRepository
+from .area_repositorio import AreaRepository
