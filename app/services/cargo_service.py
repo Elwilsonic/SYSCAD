@@ -1,60 +1,47 @@
-from app import db
+from app.repositories import CargoRepository
 from app.models import Cargo
 
-class CargoRepository:
+class CargoService:
     @staticmethod
-    def crear(cargo):
+    def crear(cargo: Cargo) -> Cargo:
         """
         Crea un nuevo cargo en la base de datos.
         :param cargo: Objeto Cargo a crear.
         :return: Objeto Cargo creado.
         """
-        db.session.add(cargo)
-        db.session.commit()
-        return cargo
+        return CargoRepository.crear(cargo)
 
     @staticmethod
-    def buscar_por_id(cargo_id):
+    def buscar_por_id(cargo_id: int) -> Cargo:
         """
         Busca un cargo por su ID.
         :param cargo_id: ID del cargo a buscar.
         :return: Objeto Cargo encontrado o None si no existe.
         """
-        return Cargo.query.get(cargo_id)
+        return CargoRepository.buscar_por_id(cargo_id)
 
     @staticmethod
-    def buscar_todos():
+    def buscar_todos() -> list:
         """
         Busca todos los cargos en la base de datos.
         :return: Lista de objetos Cargo.
         """
-        return Cargo.query.all()
+        return CargoRepository.buscar_todos()
 
     @staticmethod
-    def actualizar(cargo_id, nuevos_datos):
+    def actualizar(cargo_id: int, nuevos_datos: Cargo) -> Cargo:
         """
         Actualiza un cargo existente en la base de datos.
         :param cargo_id: ID del cargo a actualizar.
         :param nuevos_datos: Objeto Cargo con los nuevos datos.
         :return: Objeto Cargo actualizado o None si no existe.
         """
-        cargo = Cargo.query.get(cargo_id)
-        if not cargo:
-            return None
-        cargo.nombre = nuevos_datos.nombre
-        cargo.puntos = nuevos_datos.puntos
-        cargo.categoria_cargo_id = nuevos_datos.categoria_cargo_id
-        cargo.tipo_dedicacion_id = nuevos_datos.tipo_dedicacion_id
-        db.session.commit()
-        return cargo
+        return CargoRepository.actualizar(cargo_id, nuevos_datos)
 
     @staticmethod
-    def borrar_por_id(cargo_id):
+    def borrar_por_id(cargo_id: int) -> None:
         """
         Elimina un cargo de la base de datos por su ID.
         :param cargo_id: ID del cargo a eliminar.
         """
-        cargo = Cargo.query.get(cargo_id)
-        if cargo:
-            db.session.delete(cargo)
-            db.session.commit()
+        CargoRepository.borrar_por_id(cargo_id)
