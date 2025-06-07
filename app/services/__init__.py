@@ -14,3 +14,4 @@ from .orientacion_service import OrientacionService
 from .autoridad_service import AutoridadService
 from .cargo_service import CargoRepository
 from .categoriacargo_service import CategoriaCargoService
+from .tipo_dedicacion_service import TipoDedicacionService
