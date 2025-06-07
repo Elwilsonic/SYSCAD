@@ -12,3 +12,4 @@ from .plan_service import PlanService
 from .materia_service import MateriaService
 from .orientacion_service import OrientacionService
 from .autoridad_service import AutoridadService
+from .cargo_service import CargoRepository
