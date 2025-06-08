@@ -12,3 +12,5 @@ class Autoridad(db.Model):
 
     cargo_id: int = db.Column(db.Integer, db.ForeignKey('cargos.id'))
     cargo = db.relationship('Cargo')
+    # Relación inversa para la relación muchos a muchos con Materia
+    materias = db.relationship('Materia', secondary='autoridades_materias', back_populates='autoridades')
