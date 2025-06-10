@@ -15,3 +15,4 @@ from .autoridad_repositorio import AutoridadRepository
 from .cargo_repositorio import CargoRepository
 from .categoriacargo_repositorio import CategoriaCargoRepository
 from .tipo_dedicacion_repositorio import TipoDedicacionRepository
+from .user_repositorio import UsuarioRepository
