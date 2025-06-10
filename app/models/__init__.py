@@ -16,3 +16,5 @@ from .plan import Plan
 from .orientacion import Orientacion
 from .universidad import Universidad
 from .area import Area
+from .user import Usuario
+
