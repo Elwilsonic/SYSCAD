@@ -15,3 +15,4 @@ from .autoridad_service import AutoridadService
 from .cargo_service import CargoRepository
 from .categoriacargo_service import CategoriaCargoService
 from .tipo_dedicacion_service import TipoDedicacionService
+from .user_service import UsuarioService
