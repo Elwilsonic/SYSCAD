@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from app import db
-from app.models import autoridades_materias
+from app.models.relations import autoridades_materias
 
 @dataclass(init=False, repr=True, eq=True)
 class Materia(db.Model):
