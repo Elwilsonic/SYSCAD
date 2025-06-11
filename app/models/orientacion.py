@@ -2,12 +2,7 @@ from app import db
 from app.models.especialidad import Especialidad
 from app.models.plan import Plan
 from app.models.materia import Materia
-
-# Tabla intermedia para la relación muchos a muchos entre Orientacion y Materia
-orientacion_materias = db.Table('orientacion_materias',
-    db.Column('orientacion_id', db.Integer, db.ForeignKey('orientaciones.id'), primary_key=True),
-    db.Column('materia_id', db.Integer, db.ForeignKey('materias.id'), primary_key=True)
-)
+from app.models.relations import orientacion_materias
 
 class Orientacion(db.Model):
     __tablename__ = 'orientaciones'
