@@ -4,3 +4,5 @@ SQLAlchemy==2.0.40
 psycopg2==2.9.10
 psycopg[binary]
 python-dotenv==1.1.0
+flask-marshmallow==0.15.0
+marshmallow==3.20.1
