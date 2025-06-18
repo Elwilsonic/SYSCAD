@@ -3,7 +3,7 @@ import os
 from flask import current_app
 from app import create_app,db
 from app.models import Materia, Orientacion, Autoridad, Cargo, CategoriaCargo, TipoDedicacion, Especialidad, Plan
-from app.services.materia_service import MateriaService
+from app.services import MateriaService
 
 class MateriaTestCase(unittest.TestCase):
     def setUp(self):
@@ -45,6 +45,7 @@ class MateriaTestCase(unittest.TestCase):
         self._assert_materia(
             materias[1], "Base de datos", "BD101", "Base de datos basica")
         self.assertEqual(len(materias), 2)
+        
     def test_actualizar_materia(self):
         materia = self.__nuevoMateria()
         MateriaService.crear(materia)
@@ -139,8 +140,12 @@ class MateriaTestCase(unittest.TestCase):
         return tipo
         
     def __CategoriaCargo(self):
-        categoria = CategoriaCargo()
-        categoria.nombre = "Docente"
+        categoria = CategoriaCargo.query.filter_by(nombre="Docente").first()
+        if categoria is None:
+            categoria = CategoriaCargo()
+            categoria.nombre = "Docente"
+            db.session.add(categoria)
+            db.session.commit()
         return categoria
     
     def __nuevoOrientacion(self):
@@ -170,3 +175,6 @@ class MateriaTestCase(unittest.TestCase):
         self.assertEqual(materia.observacion, observacion)
         self.assertIsNotNone(materia.id)
         self.assertGreaterEqual(materia.id, 1)
+
+if __name__ == '__main__':
+    unittest.main()
