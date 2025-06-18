@@ -48,6 +48,31 @@ class CategoriaCargoTestCase(unittest.TestCase):
         CategoriaCargoService.borrar_por_id(categoria.id)
         resultado = CategoriaCargoService.buscar_por_id(categoria.id)
         self.assertIsNone(resultado)
+        
+    def test_no_crear_categoria_sin_nombre(self):
+        categoria = CategoriaCargo(nombre=None)
+        with self.assertRaises(Exception):
+            db.session.add(categoria)
+            db.session.commit()
+        db.session.rollback()
+
+    def test_listar_categorias(self):
+        cat1 = CategoriaCargo(nombre="Docente")
+        cat2 = CategoriaCargo(nombre="No Docente")
+        db.session.add_all([cat1, cat2])
+        db.session.commit()
+        categorias = CategoriaCargo.query.all()
+        self.assertEqual(len(categorias), 2)
+
+    def test_nombre_unico(self):
+        cat1 = CategoriaCargo(nombre="Unico")
+        db.session.add(cat1)
+        db.session.commit()
+        cat2 = CategoriaCargo(nombre="Unico")
+        db.session.add(cat2)
+        with self.assertRaises(Exception):
+            db.session.commit()
+        db.session.rollback()
 
 if __name__ == '__main__':
     unittest.main()
