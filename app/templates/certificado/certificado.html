@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+            -justificar{
+                text-align: justify;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Certificado de Alumno Regular: {{alumno.apellido}} {{alumno.nombre}}</title>
+    </head>
+    <body>
+        <img src="/static/img/logo-ministerio.png">
+        <img src="/static/img/logo-utn.png">
+        <p class="justificar">
+    Por la presente se hace constar que {{alumno.apellido}},{{alumno.nombre}} -
+    DNI: {{alumno.nroDocumento}} - LEGAJO Nº: {{alumno.nroLegajo}}, es Estudiante
+    Regular de la especialidad {{especialidad.nombre}} de la carrera
+    que se dicta en la {{facultad.nombre}} de la {{facultad.universidad.nombre}}.
+    A solicitud del interesado y a los fines de ser presentado ante
+    quien corresponda, se le extiende el presente certificado, sin
+    enmiendas ni raspaduras, en {{facultad.ciudad}}, el {{fecha}}.-
+        </p>
+    </body>
+</html>
