@@ -17,4 +17,5 @@ from .orientacion import Orientacion
 from .universidad import Universidad
 from .area import Area
 from .user import Usuario
+from .nota import Nota
 
