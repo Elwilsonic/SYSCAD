@@ -1,6 +1,8 @@
 from app.models import Alumno
 from app.repositories import AlumnoRepository
-
+from app.services.facultad_service import FacultadService
+from app.services.especialidad_service import EspecialidadService
+from datetime import datetime
 class AlumnoService:
 
     @staticmethod
@@ -30,10 +32,16 @@ class AlumnoService:
         alumno_existente.fecha_ingreso = alumno.fecha_ingreso
         return alumno_existente
         
-    
     @staticmethod
     def borrar_por_id(id: int) -> Alumno:
         departamento = AlumnoRepository.borrar_por_id(id)
         if not departamento:
             return None
         return departamento
+
+    def generar_certificado_alumno_regular(id: int):
+        alumno = AlumnoRepository.buscar_alumno(id)
+        #TODOS relacionar alumno con facultad y especialidad
+        facultad = FacultadService.buscar_facultad(19)
+        fecha = datetime.now()
+        especialidad = EspecialidadService.buscar_especialidad()
