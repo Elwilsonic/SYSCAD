@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from datetime import date
 from app.models.tipodocumento import TipoDocumento
+from app.models.nota import Nota
 from app import db
 
 @dataclass(init=False, repr=True, eq=True)
@@ -19,3 +20,9 @@ class Alumno(db.Model):
     # Relación uno a uno con Usuario
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'))
     usuario = db.relationship('Usuario', back_populates='alumno', uselist=False)
+
+    # relacionar de alumno con notas
+    notas = db.relationship('Nota', back_populates='alumno')
+
+    #TODO: relacionar con tipo de documento
+    #TODO: aplicar
