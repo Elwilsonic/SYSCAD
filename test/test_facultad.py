@@ -1,8 +1,8 @@
 import unittest
 from flask import current_app
-from app import create_app, db  # Asegurate de importar db desde app
-from app.models import Facultad
-from app.services.facultad_service import FacultadService
+from app import create_app, db  
+from app.models import Facultad, Universidad, Autoridad
+from app.services import FacultadService
 import os
 
 class FacultadTestCase(unittest.TestCase):
@@ -34,6 +34,28 @@ class FacultadTestCase(unittest.TestCase):
         facultad_encontrada = FacultadService.buscar_por_id(facultad.id)
         self.assertIsNotNone(facultad_encontrada)
         self.assertEqual(facultad_encontrada.nombre, "Facultad de Ciencias Exactas")
+
+    def test_facultad_universidad(self):
+        universidad = Universidad(nombre="UNLP", sigla="UNLP")
+        db.session.add(universidad)
+        db.session.commit()
+        facultad = self.__nuevaFacultad()
+        facultad.universidad = universidad
+        db.session.add(facultad)
+        db.session.commit()
+        self.assertEqual(facultad.universidad.nombre, "UNLP")
+        self.assertIn(facultad, universidad.facultades)
+
+    def test_facultad_autoridades(self):
+        facultad = self.__nuevaFacultad()
+        db.session.add(facultad)
+        db.session.commit()
+        autoridad = Autoridad(nombre="Juan Perez", telefono="123456789", email="jp@unlp.edu.ar")
+        autoridad.facultad = facultad
+        db.session.add(autoridad)
+        db.session.commit()
+        self.assertEqual(autoridad.facultad.nombre, "Facultad de Ciencias Exactas")
+        self.assertIn(autoridad, facultad.autoridades)
 
     def __nuevaFacultad(self):
         facultad = Facultad()
