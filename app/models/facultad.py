@@ -15,3 +15,7 @@ class Facultad(db.Model):
     telefono : str = db.Column(db.String(20),nullable=True)
     contacto :  str = db.Column(db.String(100),nullable=True)
     email : str = db.Column(db.String(100),nullable=False)
+    
+    universidad_id = db.Column(db.Integer, db.ForeignKey('universidad.id'))
+    universidad = db.relationship('Universidad', back_populates='facultades')
+    autoridades = db.relationship('Autoridad', back_populates='facultad', cascade='all, delete-orphan')
