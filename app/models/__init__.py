@@ -1,5 +1,4 @@
 from .autoridad import Autoridad
-from .autoridad import autoridades_materias
 from .cargo import Cargo
 from .categoria_cargo import CategoriaCargo
 from .tipo_dedicacion import TipoDedicacion
