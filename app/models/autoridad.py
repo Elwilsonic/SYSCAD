@@ -2,13 +2,6 @@ from dataclasses import dataclass
 
 from app import db
 
-# Tabla de asociación muchos a muchos entre Autoridad y Materia
-autoridades_materias = db.Table(
-    'autoridades_materias',
-    db.Column('autoridad_id', db.Integer, db.ForeignKey('autoridades.id'), primary_key=True),
-    db.Column('materia_id', db.Integer, db.ForeignKey('materias.id'), primary_key=True)
-)
-
 @dataclass(init=False, repr=True, eq=True)
 class Autoridad(db.Model):
     __tablename__ = 'autoridades'
@@ -20,4 +13,7 @@ class Autoridad(db.Model):
     cargo_id: int = db.Column(db.Integer, db.ForeignKey('cargos.id'))
     cargo = db.relationship('Cargo')
     # Relación inversa para la relación muchos a muchos con Materia
-    materias = db.relationship('Materia', secondary=autoridades_materias, back_populates='autoridades')
+    materias = db.relationship('Materia', secondary='autoridades_materias', back_populates='autoridades')
+
+    facultad_id = db.Column(db.Integer, db.ForeignKey('facultades.id'))
+    facultad = db.relationship('Facultad', back_populates='autoridades')
