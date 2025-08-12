@@ -1,7 +1,16 @@
-from app.models.alumno import Alumno
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+from app.models import Alumno
+from marshmallow import Schema, fields, post_load, validate
 
-class AlumnoMapping(SQLAlchemyAutoSchema):
-    class Meta:
-        model = Alumno
-        load_instance = True
+class AlumnoMapping(Schema):
+    hashid = fields.String(dump_only=True)
+    nombre = fields.String(required=True, validate=validate.Length(min=1, max=50))
+    apellido = fields.String(required=True, validate=validate.Length(min=1, max=50))
+    nrodocumento = fields.String(required=True, validate=validate.Length(min=1, max=50))
+    sexo = fields.String(required=True, validate=validate.Length(equal=1))
+    nro_legajo = fields.Integer(required=True)
+    fecha_nacimiento = fields.Date(required=True)
+    fecha_ingreso = fields.Date(required=True)
+
+    @post_load
+    def nuevo_alumno(self, data, kwargs) -> Alumno:
+        return Alumno(data)
