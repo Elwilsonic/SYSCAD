@@ -2,7 +2,7 @@ from flask import jsonify, Blueprint, request
 from app.mapping.alumno_mapping import AlumnoMapping
 from app.services.alumno_service import AlumnoService
 
-alumno_bp = Blueprint('alumno', _name_)
+alumno_bp = Blueprint('alumno', __name__)
 alumno_mapping = AlumnoMapping()
 
 @alumno_bp.route('/alumno', methods=['GET'])
