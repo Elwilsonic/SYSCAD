@@ -4,6 +4,5 @@ home = Blueprint('home', __name__)
 
 @home.route('/', methods=['GET'])
 def index():
-    resp = jsonify('OK')
-    resp.status_code = 200
-    return resp
+    response = {"message": "OK", "data": None}
+    return jsonify(response), 200
