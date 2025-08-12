@@ -10,6 +10,10 @@ class Config(object):
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
+    HASHIDS_MIN_LENGTH: str = os.environ.get('HASHIDS_MIN_LENGTH') or '8'
+    HASHIDS_ALPHABET: str = os.environ.get('HASHIDS_ALPHABET') or os.environ.get('ALFABETO') or 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+    HASHIDS_SALT: str = os.environ.get('HASHIDS_SALT') or 'default_salt'
+    SECRET_KEY: str = os.environ.get('SECRET_KEY') or 'default_secret_key'
 
     @staticmethod
     def init_app(app):
