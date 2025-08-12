@@ -3,9 +3,11 @@ from datetime import date
 from app.models.tipodocumento import TipoDocumento
 from app.models.nota import Nota
 from app import db
+from flask_hashids import HashidMixin 
 
 @dataclass(init=False, repr=True, eq=True)
-class Alumno(db.Model):
+class Alumno(HashidMixin, db.Model):
+    __allow_unmapped__ = True
     __tablename__ = 'alumnos'
     id = db.Column(db.Integer, primary_key=True,auto_increment=True)
     nombre = db.Column(db.String(50), nullable=False) 
@@ -23,6 +25,3 @@ class Alumno(db.Model):
 
     # relacionar de alumno con notas
     notas = db.relationship('Nota', back_populates='alumno')
-
-    #TODO: relacionar con tipo de documento
-    #TODO: aplicar
