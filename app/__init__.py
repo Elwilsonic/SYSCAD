@@ -52,8 +52,6 @@ def create_app() -> Flask:
         return jsonify(ResponseSchema().dump(response)), 200
 
     from app.resources import home, certificado_bp
-    app.register_blueprint(home, url_prefix='/api/v1')
-    app.register_blueprint(certificado_bp, url_prefix='/api/v1')
     @app.shell_context_processor    
     def ctx():
         return {"app": app}
