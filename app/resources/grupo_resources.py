@@ -1,0 +1,27 @@
+from flask import Blueprint, jsonify, request
+from app.mapping import GrupoMapping
+from app.services import GrupoService
+
+grupo_bp = Blueprint('grupo', __name__)
+grupo_mapping = GrupoMapping()
+
+@grupo_bp.route('/grupo', methods=['GET'])
+def buscar_todos():
+    grupos = GrupoService.buscar_todos()
+    return grupo_mapping.dump(grupos, many=True), 200
+
+@grupo_bp.route('/grupo/<int:id>', methods=['GET'])
+def buscar_por_id(id):
+    grupo = GrupoService.buscar_por_id(id)
+    return grupo_mapping.dump(grupo), 200
+
+@grupo_bp.route('/grupo', methods=['POST'])
+def crear():
+    grupo = grupo_mapping.load(request.get_json())
+    GrupoService.crear(grupo)
+    return jsonify("Grupo creado exitosamente"), 200
+
+@grupo_bp.route('/grupo/<int:id>', methods=['DELETE'])
+def borrar_por_id(id):
+    GrupoService.borrar_por_id(id)
+    return jsonify("Grupo borrado exitosamente"), 200
