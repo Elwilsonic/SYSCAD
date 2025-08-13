@@ -1,10 +1,15 @@
-import logging
-from flask import Flask
-import os
+import logging, os
+from flask import Flask 
+from flask_migrate import Migrate
+from flask_hashids import Hashids
+from flask_marshmallow import Marshmallow
 from flask_sqlalchemy import SQLAlchemy
 from app.config import config
 
 db = SQLAlchemy()
+migrate = Migrate()
+hashids = Hashids()
+ma = Marshmallow()
 
 def create_app() -> Flask:
     """
@@ -17,6 +22,26 @@ def create_app() -> Flask:
     f = config.factory(app_context if app_context else 'development')
     app.config.from_object(f)
     db.init_app(app)
+    migrate.init_app(app, db)
+    hashids.init_app(app)
+    ma.init_app(app)
+    
+    from app.resources import (
+        home, universidad_bp, area_bp, tipodocumento_bp, tipodedicacion_bp, categoriacargo_bp, grupo_bp, grado_bp, departamento_bp,
+        certificado_bp, tipo_especialidad_bp, plan_bp
+    )
+    app.register_blueprint(home, url_prefix='/api/v1')
+    app.register_blueprint(universidad_bp, url_prefix='/api/v1')
+    app.register_blueprint(area_bp, url_prefix='/api/v1')
+    app.register_blueprint(tipodocumento_bp, url_prefix='/api/v1')
+    app.register_blueprint(tipodedicacion_bp, url_prefix='/api/v1')
+    app.register_blueprint(categoriacargo_bp, url_prefix='/api/v1')
+    app.register_blueprint(grupo_bp, url_prefix='/api/v1')
+    app.register_blueprint(grado_bp, url_prefix='/api/v1')
+    app.register_blueprint(departamento_bp, url_prefix='/api/v1')
+    app.register_blueprint(certificado_bp, url_prefix='/api/v1')
+    app.register_blueprint(tipo_especialidad_bp, url_prefix='/api/v1')
+    app.register_blueprint(plan_bp, url_prefix='/api/v1')
 
     # Endpoint principal /api/v1/
     from flask import jsonify
