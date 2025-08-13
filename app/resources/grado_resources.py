@@ -1,0 +1,27 @@
+from flask import Blueprint, jsonify, request
+from app.mapping import GradoMapping
+from app.services import GradoService
+
+grado_bp = Blueprint('grado', __name__)
+grado_mapping = GradoMapping()
+
+@grado_bp.route('/grado', methods=['GET'])
+def buscar_todos():
+    grados = GradoService.buscar_todos()
+    return grado_mapping.dump(grados, many=True), 200
+
+@grado_bp.route('/grado/<int:id>', methods=['GET'])
+def buscar_por_id(id):
+    grado = GradoService.buscar_por_id(id)
+    return grado_mapping.dump(grado), 200
+
+@grado_bp.route('/grado', methods=['POST'])
+def crear():
+    grado = grado_mapping.load(request.get_json())
+    GradoService.crear(grado)
+    return jsonify("Grado creado exitosamente"), 200
+
+@grado_bp.route('/grado/<int:id>', methods=['DELETE'])
+def borrar_por_id(id):
+    GradoService.borrar_por_id(id)
+    return jsonify("Grado borrado exitosamente"), 200
