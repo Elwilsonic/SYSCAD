@@ -7,6 +7,8 @@ area_mapping = AreaMapping()
 
 @area_bp.route('/area', methods=['GET'])
 def buscar_todos():
+    page: int = request.headers.get('X-Page', 1, type=int)
+    par_page: int = request.headers.get('X-Per-Size', 10, type=int)
     areas = AreaService.buscar_todos()
     return area_mapping.dump(areas, many=True), 200
 
