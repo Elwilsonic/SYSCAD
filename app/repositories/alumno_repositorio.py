@@ -15,7 +15,7 @@ class AlumnoRepository:
         """
         Busca un alumno por su id.
         """
-        return db.session.query(Alumno).filter_by().filter_by(id=id).first()
+        return db.session.query(Alumno).filter_by(id=id).first()
 
     @staticmethod
     def buscar_todos():
@@ -32,6 +32,7 @@ class AlumnoRepository:
         alumno_existente = db.session.merge(alumno)
         if not alumno_existente:
             return None
+        db.session.commit()
         return alumno_existente
     
     @staticmethod
