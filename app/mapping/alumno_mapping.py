@@ -13,4 +13,4 @@ class AlumnoMapping(Schema):
 
     @post_load
     def nuevo_alumno(self, data, kwargs) -> Alumno:
-        return Alumno(data)
+        return Alumno(**data)
