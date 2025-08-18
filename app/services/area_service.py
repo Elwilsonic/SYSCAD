@@ -3,7 +3,7 @@ from app.repositories import AreaRepository
 
 class AreaService:
     @staticmethod
-    def crear_area(area: Area) -> Area:
+    def crear(area: Area) -> Area:
         return AreaRepository.crear(area)
 
     @staticmethod
