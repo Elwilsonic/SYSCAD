@@ -6,6 +6,7 @@ class ResponseSchema(Schema):
 class UsuarioSchema(Schema):
     id = fields.Int(dump_only=True)
     username = fields.Str(required=True)
+    password = fields.Str(required=True, load_only=True)
     activated = fields.Bool()
 
 class AlumnoSchema(Schema):
@@ -25,6 +26,7 @@ class MateriaSchema(Schema):
     nombre = fields.Str(required=True)
     codigo = fields.Str(required=True)
     observacion = fields.Str(allow_none=True)
+    orientacion_id = fields.Int(required=True)
 
 class FacultadSchema(Schema):
     id = fields.Int(dump_only=True)
@@ -107,6 +109,7 @@ class GrupoSchema(Schema):
 class GradoSchema(Schema):
     id = fields.Int(dump_only=True)
     nombre = fields.Str(required=True)
+    descripcion = fields.Str(allow_none=True)
 
 class DepartamentoSchema(Schema):
     id = fields.Int(dump_only=True)
@@ -115,3 +118,13 @@ class DepartamentoSchema(Schema):
 class TipoDocumentoSchema(Schema):
     id = fields.Int(dump_only=True)
     nombre = fields.Str(required=True)
+    dni = fields.Str(required=True)
+    libreta_civica = fields.Str(required=True)
+    libreta_enrolamiento = fields.Str(required=True)
+    pasaporte = fields.Str(required=True)
+
+class NotaSchema(Schema):
+    id = fields.Int(dump_only=True)
+    valor = fields.Float(required=True)
+    fecha = fields.Date(required=True)
+    alumno_id = fields.Int(required=True)
