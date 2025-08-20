@@ -6,7 +6,7 @@ from app import db
 class Cargo(db.Model):
     __tablename__ = 'cargos'
 
-    id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id: int = db.Column(db.Integer, primary_key=True)
     nombre: str = db.Column(db.String(100), nullable=False)
     puntos: int = db.Column(db.Integer, nullable=False)
 

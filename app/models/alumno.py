@@ -9,7 +9,7 @@ from flask_hashids import HashidMixin
 class Alumno(HashidMixin, db.Model):
     __allow_unmapped__ = True
     __tablename__ = 'alumnos'
-    id = db.Column(db.Integer, primary_key=True,auto_increment=True)
+    id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False) 
     apellido = db.Column(db.String(50), nullable=False)
     nrodocumento= db.Column(db.String(50), nullable=False)

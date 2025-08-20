@@ -4,7 +4,7 @@ from app import db
 @dataclass(init=False, repr=True, eq=True)
 class Facultad(db.Model):
     __tablename__ = 'facultades'
-    id : int = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id : int = db.Column(db.Integer, primary_key=True)
     nombre : str = db.Column(db.String(100), nullable=False)
     abreviatura : str = db.Column(db.String(10),nullable=False)
     directorio : str = db.Column(db.String(100),nullable=False)

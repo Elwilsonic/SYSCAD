@@ -5,5 +5,5 @@ from app import db
 class CategoriaCargo(db.Model):
     __tablename__ = 'categoria_cargo'
 
-    id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id: int = db.Column(db.Integer, primary_key=True)
     nombre: str = db.Column(db.String(100), nullable=False, unique=True)

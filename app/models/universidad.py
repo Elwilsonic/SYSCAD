@@ -6,7 +6,7 @@ from flask_hashids import HashidMixin
 class Universidad(HashidMixin, db.Model):
     __allow_unmapped__ = True
     __tablename__ = "universidad"
-    id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id: int = db.Column(db.Integer, primary_key=True)
     nombre: str = db.Column(db.String(100), nullable=False)
     sigla: str = db.Column(db.String(10), nullable=False)
 

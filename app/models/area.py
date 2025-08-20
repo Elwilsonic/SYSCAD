@@ -5,6 +5,6 @@ from app import db
 class Area(db.Model):
     __tablename__ = 'areas'
 
-    id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id: int = db.Column(db.Integer, primary_key=True)
     nombre: str = db.Column(db.String(100), nullable=False)
 
