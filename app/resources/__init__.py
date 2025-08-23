@@ -10,3 +10,6 @@ from .departamento_resources import departamento_bp
 from .certificado_resource import certificado_bp
 from .tipo_especialidad_resources import tipo_especialidad_bp
 from .plan_resources import plan_bp
+from .alumno_resources import alumno_bp
+from .facultad_resources import facultad_bp
+from .autoridad_resources import autoridad_bp

@@ -3,7 +3,7 @@ from app.repositories import UniversidadRepository
 
 class UniversidadService:
     @staticmethod
-    def crear_universidad(universidad: Universidad):
+    def crear(universidad: Universidad):
         """
         Crea una nueva universidad en la base de datos.
         :param universidad: Universidad a crear.
