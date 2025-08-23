@@ -15,13 +15,9 @@ PASOS PARA CREAR LAS BASES DE DATOS
 
 1. **Abrir SQL Shell (psql):**
 
-   Al abrir SQL Shell, ingresá los siguientes valores cuando lo pida:
+   Al abrir SQL Shell, crear el usuario si no existe (SOLO NI LO LO HABÍAS CREADO ANTES)
    ```
-   Server [localhost]:
-   Database [postgres]:
-   Port [5432]:
-   Username: pprats
-   Password: naranja
+   CREATE USER pprats WITH PASSWORD 'naranja';
    ```
 
 2. **Crear las bases de datos necesarias:**
@@ -29,9 +25,9 @@ PASOS PARA CREAR LAS BASES DE DATOS
    En la consola de `psql`, ejecutá:
 
    ```sql
-   CREATE DATABASE "DEV_SYSACAD";
-   CREATE DATABASE "TEST_SYSACAD";
-   CREATE DATABASE "SYSACAD";
+   CREATE DATABASE "DEV_SYSACAD" OWNER pprats;
+   CREATE DATABASE "TEST_SYSACAD" OWNER pprats;
+   CREATE DATABASE "SYSACAD" OWNER pprats;
    ```
 
    Usá punto y coma (`;`) al final de cada línea.
