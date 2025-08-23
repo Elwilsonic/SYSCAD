@@ -5,7 +5,6 @@ from app import db
 class TipoDocumento(db.Model):
     __tablename__ = "tipodocumentos"
     id: int = db.Column(db.Integer, primary_key=True)
-    nombre: str = db.Column(db.String(100), nullable=False)
     dni: str = db.Column(db.String(20), nullable=False, unique=True)
     libreta_civica: str = db.Column(db.String(20), nullable=False, unique=True)
     libreta_enrolamiento: str = db.Column(db.String(20), nullable=False, unique=True)

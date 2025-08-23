@@ -8,4 +8,3 @@ class Especialidad(db.Model):
     nombre = db.Column(db.String(100), nullable=False)
     letra = db.Column(db.String(1), nullable=False)
     observacion = db.Column(db.String(255), nullable=True)
-    tipo_especialidad = db.Column(db.String(50), nullable=False)
