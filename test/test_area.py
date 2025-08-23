@@ -25,13 +25,13 @@ class AreaTestCase(unittest.TestCase):
 
     def test_crear_area(self):
         area = self.__nueva_area()
-        AreaService.crear_area(area)
+        AreaService.crear(area)
         self.assertIsNotNone(area.id)
         self.assertEqual(area.nombre, "Matemática")
 
     def test_buscar_area_por_id(self):
         area = self.__nueva_area()
-        AreaService.crear_area(area)
+        AreaService.crear(area)
         encontrada = AreaService.buscar_por_id(area.id)
         self.assertIsNotNone(encontrada)
         self.assertEqual(encontrada.nombre, "Matemática")
@@ -39,21 +39,21 @@ class AreaTestCase(unittest.TestCase):
     def test_buscar_todas_las_areas(self):
         area1 = self.__nueva_area(nombre="Matemática")
         area2 = self.__nueva_area(nombre="Lengua")
-        AreaService.crear_area(area1)
-        AreaService.crear_area(area2)
+        AreaService.crear(area1)
+        AreaService.crear(area2)
         todas = AreaService.buscar_todos()
         self.assertEqual(len(todas), 2)
 
     def test_actualizar_area(self):
         area = self.__nueva_area()
-        AreaService.crear_area(area)
+        AreaService.crear(area)
         area.nombre = "Física"
         area_actualizada = AreaService.actualizar_area(area)
         self.assertEqual(area_actualizada.nombre, "Física")
 
     def test_borrar_area(self):
         area = self.__nueva_area()
-        AreaService.crear_area(area)
+        AreaService.crear(area)
         AreaService.borrar_por_id(area.id)
         resultado = AreaService.buscar_por_id(area.id)
         self.assertIsNone(resultado)
