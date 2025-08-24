@@ -10,9 +10,11 @@ services:
       - postgres
     environment:
       - FLASK_CONTEXT=${FLASK_CONTEXT}
-      - SQLALCHEMY_TRACK_MODIFICATIONS=${SQLALCHEMY_TRACK_MODIFICATIONS}  
+      - SQLALCHEMY_TRACK_MODIFICATIONS=${SQLALCHEMY_TRACK_MODIFICACIONES}  
       - SQLALCHEMY_RECORD_QUERIES=${SQLALCHEMY_RECORD_QUERIES}
-      - PROD_DATABASE_URI=postgresql://pprats:naranja@postgres:5432/SYSACAD  # O el que estés usando
+      - PROD_DATABASE_URI=postgresql://pprats:naranja@postgres:5432/SYSACAD
+    volumes:
+      - ../app:/home/sysacad/app
 
   postgres:
     image: postgres:15
@@ -33,4 +35,5 @@ networks:
     external: true
 
 volumes:
+
   pgdata:
