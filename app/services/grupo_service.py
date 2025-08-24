@@ -4,7 +4,7 @@ from app.repositories import GrupoRepository
 class GrupoService:
 
     @staticmethod
-    def crear_grupo(grupo: Grupo):
+    def crear(grupo: Grupo):
         """
         Crea un nuevo grupo en la base de datos.
         :param grupo: Objeto Grupo a crear.
