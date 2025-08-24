@@ -26,31 +26,31 @@ class GrupoTestCase(unittest.TestCase):
     
     def test_crear_grupo(self):
         grupo = self.__nuevogrupo()
-        GrupoService.crear_grupo(grupo)
+        GrupoService.crear(grupo)
         self.assertIsNotNone(grupo.id)
     
     def test_buscar_grupo(self):
         grupo = self.__nuevogrupo()
-        GrupoService.crear_grupo(grupo)
+        GrupoService.crear(grupo)
         encontrado = GrupoService.buscar_por_id(grupo.id)
         self.assertEqual(encontrado.nombre, "Grupo A")
     
     def test_buscar_todos(self):
-        GrupoService.crear_grupo(self.__nuevogrupo("Grupo A"))
-        GrupoService.crear_grupo(self.__nuevogrupo("Grupo B"))
+        GrupoService.crear(self.__nuevogrupo("Grupo A"))
+        GrupoService.crear(self.__nuevogrupo("Grupo B"))
         todos = GrupoService.buscar_todos()
         self.assertGreaterEqual(len(todos), 2)
 
     def test_actualizar_grupo(self):
         grupo = self.__nuevogrupo()
-        GrupoService.crear_grupo(grupo)
+        GrupoService.crear(grupo)
         grupo.nombre = "Grupo Actualizado"
         actualizado = GrupoService.actualizar_grupo(grupo)
         self.assertEqual(actualizado.nombre, "Grupo Actualizado")
 
     def test_borrar_grupo(self):
         grupo = self.__nuevogrupo()
-        GrupoService.crear_grupo(grupo)
+        GrupoService.crear(grupo)
         GrupoService.borrar_por_id(grupo.id)
         self.assertIsNone(GrupoService.buscar_por_id(grupo.id))
 

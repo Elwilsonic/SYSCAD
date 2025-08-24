@@ -28,31 +28,31 @@ class PlanTestCase(unittest.TestCase):
     
     def test_crear_plan(self):
         plan = self.__nuevoplan()
-        PlanService.crear_plan(plan)
+        PlanService.crear(plan)
         self.assertIsNotNone(plan.id)
     
     def test_buscar_plan(self):
         plan = self.__nuevoplan()
-        PlanService.crear_plan(plan)
+        PlanService.crear(plan)
         encontrado = PlanService.buscar_por_id(plan.id)
         self.assertEqual(encontrado.nombre, "Plan A")
     
     def test_buscar_todos(self):
-        PlanService.crear_plan(self.__nuevoplan("Plan A"))
-        PlanService.crear_plan(self.__nuevoplan("Plan B", "2024-01-01", "2024-12-31"))
+        PlanService.crear(self.__nuevoplan("Plan A"))
+        PlanService.crear(self.__nuevoplan("Plan B", "2024-01-01", "2024-12-31"))
         todos = PlanService.buscar_todos()
         self.assertGreaterEqual(len(todos), 2)
     
     def test_actualizar_plan(self):
         plan = self.__nuevoplan()
-        PlanService.crear_plan(plan)
+        PlanService.crear(plan)
         plan.nombre = "Plan Actualizado"
         actualizado = PlanService.actualizar_plan(plan)
         self.assertEqual(actualizado.nombre, "Plan Actualizado")
     
     def test_borrar_plan(self):
         plan = self.__nuevoplan()
-        PlanService.crear_plan(plan)
+        PlanService.crear(plan)
         PlanService.borrar_por_id(plan.id)
         self.assertIsNone(PlanService.buscar_por_id(plan.id))
     

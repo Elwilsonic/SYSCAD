@@ -29,7 +29,7 @@ class GradoTestCase(unittest.TestCase):
 
     def test_crear_grado(self):
         grado = self.__nuevogrado()
-        GradoService.crear_grado(grado)
+        GradoService.crear(grado)
         self.assertIsNotNone(grado)
         self.assertIsNotNone(grado.id)
         self.assertGreaterEqual(grado.id, 1)
@@ -37,7 +37,7 @@ class GradoTestCase(unittest.TestCase):
 
     def test_grado_busqueda(self):
         grado = self.__nuevogrado()
-        GradoService.crear_grado(grado)
+        GradoService.crear(grado)
         r=GradoService.buscar_por_id(grado.id)
         self.assertIsNotNone(r)
         self.assertEqual(r.nombre, "Primero")
@@ -47,21 +47,25 @@ class GradoTestCase(unittest.TestCase):
     def test_buscar_grados(self):
         grado1 = self.__nuevogrado()
         grado2 = self.__nuevogrado()
-        GradoService.crear_grado(grado1)
-        GradoService.crear_grado(grado2)
+        GradoService.crear(grado1)
+        GradoService.crear(grado2)
         grados = GradoService.buscar_todos()
         self.assertIsNotNone(grados)
         self.assertGreaterEqual(len(grados), 2)
 
     def test_actualizar_grado(self):
         grado = self.__nuevogrado()
-        GradoService.crear_grado(grado)
+        GradoService.crear(grado)
+        self.assertIsNotNone(grado.id)
         grado.nombre = "segundo"
         grado.descripcion = "Descripcion del segundo grado"
+        actualizado = GradoService.actualizar_grado(grado)
+        self.assertEqual(actualizado.nombre, "segundo")
+        self.assertEqual(actualizado.descripcion, "Descripcion del segundo grado")
 
     def test_borrar_grado(self):
         universidad = self.__nuevogrado()
-        GradoService.crear_grado(universidad)
+        GradoService.crear(universidad)
         GradoService.borrar_por_id(universidad.id)
         resultado = GradoService.buscar_por_id(universidad.id)
         self.assertIsNone(resultado)
