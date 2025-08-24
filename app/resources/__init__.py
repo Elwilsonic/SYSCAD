@@ -13,3 +13,7 @@ from .plan_resources import plan_bp
 from .alumno_resources import alumno_bp
 from .facultad_resources import facultad_bp
 from .autoridad_resources import autoridad_bp
+from .cargo_resources import cargo_bp
+from .especialidad_resources import especialidad_bp
+from .materia_resources import materia_bp
+from .orientacion_resources import orientacion_bp
