@@ -21,6 +21,12 @@ def crear():
     OrientacionService.crear(orientacion)
     return jsonify("Orientación creada exitosamente"), 200
 
+@orientacion_bp.route('/orientaciones/<int:id>', methods=['PUT'])
+def actualizar(id):
+    orientacion = orientacion_mapping.load(request.get_json())
+    OrientacionService.actualizar(id, orientacion)
+    return jsonify("Orientación actualizada exitosamente"), 200
+
 @orientacion_bp.route('/orientaciones/<int:id>', methods=['DELETE'])
 def borrar_por_id(id):
     OrientacionService.borrar_por_id(id)

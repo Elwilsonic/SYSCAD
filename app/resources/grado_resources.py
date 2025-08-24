@@ -21,6 +21,12 @@ def crear():
     GradoService.crear(grado)
     return jsonify("Grado creado exitosamente"), 200
 
+@grado_bp.route('/grado/<int:id>', methods=['PUT'])
+def actualizar(id):
+    grado = grado_mapping.load(request.get_json())
+    GradoService.actualizar(id, grado)
+    return jsonify("Grado actualizado exitosamente"), 200
+
 @grado_bp.route('/grado/<int:id>', methods=['DELETE'])
 def borrar_por_id(id):
     GradoService.borrar_por_id(id)

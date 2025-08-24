@@ -21,6 +21,12 @@ def crear():
     MateriaService.crear(materia)
     return jsonify("Materia creada exitosamente"), 200
 
+@materia_bp.route('/materias/<int:id>', methods=['PUT'])
+def actualizar(id):
+    materia = materia_mapping.load(request.get_json())
+    MateriaService.actualizar(id, materia)
+    return jsonify("Materia actualizada exitosamente"), 200
+
 @materia_bp.route('/materias/<int:id>', methods=['DELETE'])
 def borrar_por_id(id):
     MateriaService.borrar_por_id(id)

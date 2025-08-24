@@ -23,6 +23,12 @@ def crear():
     AreaService.crear(area)
     return jsonify("Area creada exitosamente"), 200
 
+@area_bp.route('/area/<int:id>', methods=['PUT'])
+def actualizar(id):
+    area = area_mapping.load(request.get_json())
+    AreaService.actualizar(id, area)
+    return jsonify("Area actualizada exitosamente"), 200
+
 @area_bp.route('/area/<int:id>', methods=['DELETE'])
 def borrar_por_id(id):
     AreaService.borrar_por_id(id)

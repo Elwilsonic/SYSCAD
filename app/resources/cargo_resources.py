@@ -21,6 +21,12 @@ def crear():
     CargoService.crear(cargo)
     return jsonify("Cargo creado exitosamente"), 200
 
+@cargo_bp.route('/cargos/<int:id>', methods=['PUT'])
+def actualizar(id):
+    cargo = cargo_mapping.load(request.get_json())
+    CargoService.actualizar(id, cargo)
+    return jsonify("Cargo actualizado exitosamente"), 200
+
 @cargo_bp.route('/cargos/<int:id>', methods=['DELETE'])
 def borrar_por_id(id):
     CargoService.borrar_por_id(id)

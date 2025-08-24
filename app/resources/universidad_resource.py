@@ -21,6 +21,12 @@ def crear():
     UniversidadService.crear(universidad) 
     return jsonify("Universidad creada exitosamente"), 200
 
+@universidad_bp.route('/universidad/<int:id>', methods=['PUT'])
+def actualizar(id):
+    universidad = universidad_mapping.load(request.get_json())
+    UniversidadService.actualizar(id, universidad)
+    return jsonify("Universidad actualizada exitosamente"), 200
+
 @universidad_bp.route('/universidad/<int:id>', methods=['DELETE'])
 def borrar_por_id(id):
     UniversidadService.borrar_por_id(id)

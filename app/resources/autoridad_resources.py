@@ -21,6 +21,12 @@ def crear():
     AutoridadService.crear(autoridad) 
     return jsonify("Autoridad creada exitosamente"), 200
 
+@autoridad_bp.route('/autoridad/<int:id>', methods=['PUT'])
+def actualizar(id):
+    autoridad = autoridad_mapping.load(request.get_json())
+    AutoridadService.actualizar(id, autoridad)
+    return jsonify("Autoridad actualizada exitosamente"), 200
+
 @autoridad_bp.route('/autoridad/<int:id>', methods=['DELETE'])
 def borrar_por_id(id):
     AutoridadService.borrar_por_id(id)

@@ -21,6 +21,12 @@ def crear():
     EspecialidadService.crear(especialidad)
     return jsonify("Especialidad creada exitosamente"), 200
 
+@especialidad_bp.route('/especialidades/<int:id>', methods=['PUT'])
+def actualizar(id):
+    especialidad = especialidad_mapping.load(request.get_json())
+    EspecialidadService.actualizar(id, especialidad)
+    return jsonify("Especialidad actualizada exitosamente"), 200
+
 @especialidad_bp.route('/especialidades/<int:id>', methods=['DELETE'])
 def borrar_por_id(id):
     EspecialidadService.borrar_por_id(id)

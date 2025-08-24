@@ -21,6 +21,12 @@ def crear():
     FacultadService.crear(facultad) 
     return jsonify("Facultad creada exitosamente"), 200
 
+@facultad_bp.route('/facultad/<int:id>', methods=['PUT'])
+def actualizar(id):
+    facultad = facultad_mapping.load(request.get_json())
+    FacultadService.actualizar(id, facultad)
+    return jsonify("Facultad actualizada exitosamente"), 200
+
 @facultad_bp.route('/facultad/<int:id>', methods=['DELETE'])
 def borrar_por_id(id):
     FacultadService.borrar_por_id(id)

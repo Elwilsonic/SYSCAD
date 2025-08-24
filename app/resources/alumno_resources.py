@@ -21,6 +21,12 @@ def crear():
     AlumnoService.crear(alumno) 
     return jsonify("Alumno creado exitosamente"), 200
 
+@alumno_bp.route('/alumno/<int:id>', methods=['PUT'])
+def actualizar(id):
+    alumno = alumno_mapping.load(request.get_json())
+    AlumnoService.actualizar(id, alumno)
+    return jsonify("Alumno actualizado exitosamente"), 200  
+
 @alumno_bp.route('/alumno/<int:id>', methods=['DELETE'])
 def borrar_por_id(id):
     AlumnoService.borrar_por_id(id)
