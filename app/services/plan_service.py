@@ -4,7 +4,7 @@ from app.repositories import PlanRepository
 class PlanService:
 
     @staticmethod
-    def crear_plan(plan: Plan):
+    def crear(plan: Plan):
         """
         Crea un plan en la base de datos.
         """

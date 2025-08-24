@@ -4,7 +4,7 @@ from app.repositories import GradoRepository
 class GradoService:
 
     @staticmethod
-    def crear_grado(grado: Grado):
+    def crear(grado: Grado):
         """
         Crea un nuevo cargo en la base de datos.
         :param cargo: Objeto Cargo a crear.

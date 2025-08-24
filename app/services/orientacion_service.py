@@ -11,7 +11,7 @@ class OrientacionService:
         return OrientacionRepository.get_by_id(orientacion_id)
 
     @staticmethod
-    def crear_orientacion(nombre, especialidad, plan, materias):
+    def crear(nombre, especialidad, plan, materias):
         orientacion = Orientacion()
         orientacion.nombre = nombre
         orientacion.especialidad = especialidad

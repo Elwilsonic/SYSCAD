@@ -48,7 +48,6 @@ class FacultadService:
         facultad_existente.abreviatura = facultad.abreviatura
         facultad_existente.directorio = facultad.directorio
         facultad_existente.sigla = facultad.sigla
-        facultad_existente.codigo_postal = facultad.codigo_postal
         facultad_existente.ciudad = facultad.ciudad
         facultad_existente.domicilio = facultad.domicilio
         facultad_existente.telefono = facultad.telefono
