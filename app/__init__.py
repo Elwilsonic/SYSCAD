@@ -28,7 +28,7 @@ def create_app() -> Flask:
     
     from app.resources import (
         alumno_bp, area_bp, autoridad_bp, categoriacargo_bp, certificado_bp, departamento_bp, facultad_bp, grado_bp, grupo_bp, home, plan_bp,
-        tipo_especialidad_bp, tipodedicacion_bp, tipodocumento_bp, universidad_bp
+        tipo_especialidad_bp, tipodedicacion_bp, tipodocumento_bp, universidad_bp, materia_bp, cargo_bp, especialidad_bp, orientacion_bp
     )
     app.register_blueprint(home, url_prefix='/api/v1')
     app.register_blueprint(universidad_bp, url_prefix='/api/v1')
@@ -45,6 +45,10 @@ def create_app() -> Flask:
     app.register_blueprint(alumno_bp, url_prefix='/api/v1')
     app.register_blueprint(autoridad_bp, url_prefix='/api/v1')
     app.register_blueprint(facultad_bp, url_prefix='/api/v1')
+    app.register_blueprint(materia_bp, url_prefix='/api/v1')
+    app.register_blueprint(cargo_bp, url_prefix='/api/v1')
+    app.register_blueprint(especialidad_bp, url_prefix='/api/v1')
+    app.register_blueprint(orientacion_bp, url_prefix='/api/v1')
 
     # Endpoint principal /api/v1/
     from flask import jsonify
