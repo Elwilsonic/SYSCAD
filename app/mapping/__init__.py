@@ -11,3 +11,7 @@ from .plan_mapping import PlanMapping
 from .tipodedicacion_mapping import TipoDedicacionMapping
 from .tipodocumento_mapping import TipoDocumentoMapping
 from .tipo_especialidad_mapping import TipoEspecialidadMapping
+from .cargo_mapping import CargoMapping
+from .especialidad_mapping import EspecialidadMapping
+from .materia_mapping import MateriaMapping
+from .orientacion_mapping import OrientacionMapping
