@@ -19,9 +19,5 @@ class Alumno(HashidMixin, db.Model):
     sexo = db.Column(db.String(1), nullable=False) 
     nro_legajo = db.Column(db.Integer, nullable=False)
     fecha_ingreso = db.Column(db.Date, nullable=False)
-    # Relación uno a uno con Usuario
-    usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'))
-    usuario = db.relationship('Usuario', back_populates='alumno', uselist=False)
-
     # relacionar de alumno con notas
     notas = db.relationship('Nota', back_populates='alumno')

@@ -1,20 +1,9 @@
-from app import db
+from app.repositories.base_repository import BaseRepository
 from app.models import Materia
+from app import db
 
-class MateriaRepository:
-    @staticmethod
-    def crear(materia: Materia) -> Materia:
-        db.session.add(materia)
-        db.session.commit()
-        return materia
-
-    @staticmethod
-    def buscar_por_id(materia_id: int) -> Materia:
-        return Materia.query.get(materia_id)
-
-    @staticmethod
-    def buscar_todos() -> list[Materia]:
-        return Materia.query.all()
+class MateriaRepository(BaseRepository):
+    model = Materia
 
     @staticmethod
     def actualizar(materia_id: int, nuevos_datos: Materia) -> Materia:
@@ -25,10 +14,3 @@ class MateriaRepository:
             materia.observacion = nuevos_datos.observacion
             db.session.commit()
         return materia
-
-    @staticmethod
-    def borrar_por_id(materia_id: int) -> None:
-        materia = Materia.query.get(materia_id)
-        if materia:
-            db.session.delete(materia)
-            db.session.commit()
