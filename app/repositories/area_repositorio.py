@@ -2,7 +2,7 @@ from app.repositories.base_repository import BaseRepository
 from app import db
 from app.models import Area
 
-class AreaRepository:
+class AreaRepository(BaseRepository):
     model = Area
     @staticmethod
     def actualizar_area(area: Area) -> Area:

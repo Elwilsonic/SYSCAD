@@ -2,7 +2,7 @@ from app.repositories.base_repository import BaseRepository
 from app import db
 from app.models import Cargo
 
-class CargoRepository:
+class CargoRepository(BaseRepository):
     model = Cargo
     
     @staticmethod

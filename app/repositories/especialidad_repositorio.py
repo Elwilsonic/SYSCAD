@@ -2,7 +2,7 @@ from app.repositories.base_repository import BaseRepository
 from app import db
 from app.models import Especialidad
 
-class EspecialidadRepository:
+class EspecialidadRepository(BaseRepository):
     model = Especialidad
     
     @staticmethod

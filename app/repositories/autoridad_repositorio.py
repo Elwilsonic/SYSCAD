@@ -2,7 +2,7 @@ from app.repositories.base_repository import BaseRepository
 from app import db
 from app.models import Autoridad
 
-class AutoridadRepository:
+class AutoridadRepository(BaseRepository):
     model = Autoridad
     
     @staticmethod
@@ -13,6 +13,5 @@ class AutoridadRepository:
         autoridad.nombre = nuevos_datos.nombre
         autoridad.telefono = nuevos_datos.telefono
         autoridad.email = nuevos_datos.email
-        # Agrega aquí otros campos si los hay
         db.session.commit()
         return autoridad
