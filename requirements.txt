@@ -12,4 +12,4 @@ weasyprint==65.1 #Tranforma texto a PDF
 python-odt-template==0.5.1
 docxtpl==0.20.0
 Flask-Hashids==1.0.3 #Usa otra libreria para generar IDs únicos
-reportslab==1.5.0
+reportlab==4.0.7
