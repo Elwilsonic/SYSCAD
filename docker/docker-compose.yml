@@ -1,5 +1,24 @@
 version: "3.8"
 services:
+  reverse-proxy:
+      image: traefik:v2.11
+      container_name: traefik
+      restart: unless-stopped
+      security_opt:
+        - no-new-privileges:true
+      ports:
+        - 80:80
+        - 443:443
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock:ro
+        - ../app/traefik/config/traefik.yml:/etc/traefik/traefik.yml:ro
+        - ../app/traefik/config/config.yml:/etc/traefik/config.yml:ro
+        - ../app/traefik/certs:/etc/certs:ro
+      networks:
+        - mired
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.traefik=true"
   estructura:
     image: flask-sysacad:v1.0.0
     networks:
@@ -10,12 +29,20 @@ services:
       - postgres
     environment:
       - FLASK_CONTEXT=${FLASK_CONTEXT}
-      - SQLALCHEMY_TRACK_MODIFICATIONS=${SQLALCHEMY_TRACK_MODIFICACIONES}  
+      - SQLALCHEMY_TRACK_MODIFICATIONS=${SQLALCHEMY_TRACK_MODIFICATIONS}  
       - SQLALCHEMY_RECORD_QUERIES=${SQLALCHEMY_RECORD_QUERIES}
       - PROD_DATABASE_URI=postgresql://pprats:naranja@postgres:5432/SYSACAD
     volumes:
       - ../app:/home/sysacad/app
-
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`universidad.localhost`)"
+      - "traefik.http.routers.backend.entrypoints=https"
+      - "traefik.http.routers.backend.tls=true"
+      # Puerto por defecto del contenedor en flask
+      - "traefik.http.services.backend.loadbalancer.server.port=5000"
+      - "traefik.docker.network=mired"
+      
   postgres:
     image: postgres:15
     restart: always
