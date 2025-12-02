@@ -22,10 +22,8 @@ class TipoDocumentoTestCase(unittest.TestCase):
     def test_tipodocumento_creation(self):
         tipodocumento = self.__nuevotipodoumento()
         self.assertIsNotNone(tipodocumento)
-        self.assertIsNotNone(tipodocumento.dni)
-        self.assertEqual(tipodocumento.dni, "DNI")
-        self.assertEqual(tipodocumento.libreta_civica, "12345678")
-        self.assertEqual(tipodocumento.libreta_enrolamiento, "87654321")
+        self.assertEqual(tipodocumento.sigla, "DNI")
+        self.assertEqual(tipodocumento.nombre, "Documento Nacional de Identidad")
 
     def test_crear(self):
         tipodocumento = self.__nuevotipodoumento()
@@ -33,19 +31,19 @@ class TipoDocumentoTestCase(unittest.TestCase):
         self.assertIsNotNone(tipodocumento)
         self.assertIsNotNone(tipodocumento.id)
         self.assertGreaterEqual(tipodocumento.id, 1)
-        self.assertEqual(tipodocumento.dni, "DNI")
+        self.assertEqual(tipodocumento.sigla, "DNI")
 
     def test_busqueda(self):
         tipodocumento = self.__nuevotipodoumento()
         TipoDocumentoService.crear(tipodocumento)
         r=TipoDocumentoService.buscar_por_id(tipodocumento.id)
         self.assertIsNotNone(r)
-        self.assertEqual(r.dni, "DNI")
-        self.assertEqual(r.libreta_civica, "12345678")
-
+        self.assertEqual(r.sigla, "DNI")
+        self.assertEqual(r.nombre, "Documento Nacional de Identidad")
+        
     def test_buscar_todos(self):
         tipodocumento1 = self.__nuevotipodoumento()
-        tipodocumento2 = self.__nuevotipodoumento("DNI2", "23456789", "98765432", "CD123456")
+        tipodocumento2 = self.__nuevotipodoumento("DNI2", "Documento de Identidad 2")
         TipoDocumentoService.crear(tipodocumento1)
         TipoDocumentoService.crear(tipodocumento2)
         documentos = TipoDocumentoService.buscar_todos()
@@ -55,9 +53,9 @@ class TipoDocumentoTestCase(unittest.TestCase):
     def test_actualizar(self):
         tipodocumento = self.__nuevotipodoumento()
         TipoDocumentoService.crear(tipodocumento)
-        tipodocumento.dni = "DNI actualizado"
+        tipodocumento.sigla = "DNI act"
         tipodocumento_actualizado = TipoDocumentoService.actualizar(tipodocumento.id, tipodocumento)
-        self.assertEqual(tipodocumento_actualizado.dni, "DNI actualizado")
+        self.assertEqual(tipodocumento_actualizado.sigla, "DNI act")
     
     def test_borrar(self):
         tipodocumento = self.__nuevotipodoumento()
@@ -66,11 +64,9 @@ class TipoDocumentoTestCase(unittest.TestCase):
         resultado = TipoDocumentoService.buscar_por_id(tipodocumento.id)
         self.assertIsNone(resultado)
 
-    def __nuevotipodoumento(self, dni="DNI", libreta_civica="12345678", libreta_enrolamiento="87654321", pasaporte="AB123456"):
+    def __nuevotipodoumento(self, sigla="DNI", nombre="Documento Nacional de Identidad"):
         tipodocumento = TipoDocumento()
-        tipodocumento.dni = dni
-        tipodocumento.libreta_civica = libreta_civica
-        tipodocumento.libreta_enrolamiento = libreta_enrolamiento
-        tipodocumento.pasaporte = pasaporte
+        tipodocumento.sigla = sigla
+        tipodocumento.nombre = nombre
         return tipodocumento
 

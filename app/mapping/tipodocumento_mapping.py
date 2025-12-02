@@ -3,8 +3,8 @@ from marshmallow import Schema, fields, post_load, validate
 
 class TipoDocumentoMapping(Schema):
     id = fields.Integer()
-    nombre = fields.String(required=True, validate=validate.Length(min=1, max=100))
-    descripcion = fields.String(validate=validate.Length(max=255))
+    sigla = fields.String(required=True, validate=validate.Length(min=1, max=10))
+    nombre = fields.String(required=True, validate=validate.Length(min=1, max=50))
 
     @post_load
     def nuevo_tipodocumento(self, data, **kwargs):

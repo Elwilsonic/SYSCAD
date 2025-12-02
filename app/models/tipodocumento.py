@@ -4,8 +4,6 @@ from app import db
 @dataclass(init=False, repr=True, eq=True)
 class TipoDocumento(db.Model):
     __tablename__ = "tipodocumentos"
-    id: int = db.Column(db.Integer, primary_key=True)
-    dni: str = db.Column(db.String(20), nullable=False, unique=True)
-    libreta_civica: str = db.Column(db.String(20), nullable=False, unique=True)
-    libreta_enrolamiento: str = db.Column(db.String(20), nullable=False, unique=True)
-    pasaporte: str = db.Column(db.String(20), nullable=False, unique=True)
+    id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    sigla: str = db.Column(db.String(10), nullable=False)
+    nombre: str = db.Column(db.String(50), nullable=False)

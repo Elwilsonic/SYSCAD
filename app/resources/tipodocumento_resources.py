@@ -23,7 +23,8 @@ def crear():
     errors = tipodocumento_mapping.validate(data)
     if errors:
         return jsonify(errors), 400
-    tipodocumento = TipoDocumentoService.crear(data)
+    tipodocumento_obj = tipodocumento_mapping.load(data)
+    tipodocumento = TipoDocumentoService.crear(tipodocumento_obj)
     return tipodocumento_mapping.dump(tipodocumento), 201
 
 @tipodocumento_bp.route('/tipodocumento/<int:id>', methods=['PUT'])
