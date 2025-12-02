@@ -11,11 +11,10 @@ class FichaService:
     def obtener_ficha(self, alumno_id: int) -> dict:
         alumno = self.alumno_repository.obtener_por_id(alumno_id)
         return {
-            "legajo": alumno.legajo,
+            "nro_legajo": alumno.nro_legajo,
             "apellido": alumno.apellido,
             "nombre": alumno.nombre,
-            "dni": alumno.dni,
-            "facultad": alumno.facultad.nombre
+            "nrodocumento": alumno.nrodocumento
         }
 
     def generar_pdf(self, alumno_id: int) -> bytes:

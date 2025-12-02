@@ -6,15 +6,19 @@ from app.models import Alumno, Facultad
 class TestFichaService(unittest.TestCase):
     def setUp(self):
         mock_repo = MagicMock()
-        facultad = Facultad(nombre="Facultad de Ingeniería")
-        alumno = Alumno(legajo="A123", apellido="Pérez", nombre="Juan", dni="12345678", facultad=facultad)
+        alumno = Alumno()
+        alumno.nro_legajo = 123
+        alumno.apellido = "Pérez"
+        alumno.nombre = "Juan"
+        alumno.nrodocumento = "12345678"
         mock_repo.obtener_por_id.return_value = alumno
         self.service = FichaService(mock_repo)
 
     def test_obtener_ficha_json(self):
         ficha = self.service.obtener_ficha(1)
         self.assertEqual(ficha["nombre"], "Juan")
-        self.assertEqual(ficha["facultad"], "Facultad de Ingeniería")
+        self.assertEqual(ficha["nro_legajo"], 123)
+        self.assertEqual(ficha["nrodocumento"], "12345678")
 
     def test_generar_pdf(self):
         pdf_bytes = self.service.generar_pdf(1)
