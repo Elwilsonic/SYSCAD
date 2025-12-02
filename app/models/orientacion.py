@@ -3,8 +3,9 @@ from app.models.especialidad import Especialidad
 from app.models.plan import Plan
 from app.models.materia import Materia
 from app.models.relations import orientacion_materias
+from flask_hashids import HashidMixin
 
-class Orientacion(db.Model):
+class Orientacion(HashidMixin, db.Model):
     __tablename__ = 'orientaciones'
 
     id = db.Column(db.Integer, primary_key=True)

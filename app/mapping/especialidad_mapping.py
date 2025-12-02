@@ -2,7 +2,7 @@ from marshmallow import fields, Schema, post_load, validate
 from app.models import Especialidad
 
 class EspecialidadMapping(Schema):
-    id = fields.Integer(dump_only=True)
+    hashid = fields.String(dump_only=True)
     nombre = fields.String(required=True, validate=validate.Length(min=1, max=100))
     letra = fields.String(required=True, validate=validate.Length(min=1, max=1))
 

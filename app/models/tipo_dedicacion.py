@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 from app import db
+from flask_hashids import HashidMixin
 
 @dataclass(init=False, repr=True, eq=True)
-class TipoDedicacion(db.Model):
+class TipoDedicacion(HashidMixin, db.Model):
     __tablename__ = 'tipo_dedicacion'
 
     id = db.Column(db.Integer, primary_key=True)

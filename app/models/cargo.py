@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 from app import db
+from flask_hashids import HashidMixin
 
 @dataclass(init=False, repr=True, eq=True)
  # HEREDA DE db.Model
-class Cargo(db.Model):
+class Cargo(HashidMixin, db.Model):
     __tablename__ = 'cargos'
 
     id: int = db.Column(db.Integer, primary_key=True)

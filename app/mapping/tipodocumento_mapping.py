@@ -2,7 +2,7 @@ from app.models import TipoDocumento
 from marshmallow import Schema, fields, post_load, validate
 
 class TipoDocumentoMapping(Schema):
-    id = fields.Integer()
+    hashid = fields.String(dump_only=True)
     sigla = fields.String(required=True, validate=validate.Length(min=1, max=10))
     nombre = fields.String(required=True, validate=validate.Length(min=1, max=50))
 

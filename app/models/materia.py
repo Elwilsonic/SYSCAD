@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 from app import db
 from app.models.relations import autoridades_materias
+from flask_hashids import HashidMixin
 
 @dataclass(init=False, repr=True, eq=True)
-class Materia(db.Model):
+class Materia(HashidMixin, db.Model):
     __tablename__ = 'materias'
     id: int = db.Column(db.Integer, primary_key=True)
     nombre: str = db.Column(db.String(100), nullable=False)
