@@ -28,7 +28,8 @@ class AlumnoTestCase(unittest.TestCase):
         self.assertIsNotNone(alumno.nombre)
         self.assertEqual(alumno.nombre, "Juan")
         self.assertEqual(alumno.apellido, "Pérez")
-        self.assertEqual(alumno.tipo_documento.pasaporte, "nacnal")
+        self.assertEqual(alumno.tipo_documento.sigla, "DNI")
+        self.assertEqual(alumno.tipo_documento.nombre, "Documento Nacional de Identidad")
 
     def test_crear(self):
         alumno = self.__nuevoalumno()
@@ -37,7 +38,8 @@ class AlumnoTestCase(unittest.TestCase):
         self.assertIsNotNone(alumno.nombre)
         self.assertGreaterEqual(alumno.id, 1)
         self.assertEqual(alumno.apellido, "Pérez")
-        self.assertEqual(alumno.tipo_documento.pasaporte, "nacnal")
+        self.assertEqual(alumno.tipo_documento.sigla, "DNI")
+        self.assertEqual(alumno.tipo_documento.nombre, "Documento Nacional de Identidad")
 
     def test_busqueda(self):
         alumno = self.__nuevoalumno()
@@ -49,7 +51,7 @@ class AlumnoTestCase(unittest.TestCase):
 
     def test_buscar_todos(self):
         alumno1 = self.__nuevoalumno()
-        alumno2 = self.__nuevoalumno(nombre="Pedro", apellido="Gómez", nrodocumento="12345678", tipo_documento=None, fecha_nacimiento=date(1995,5,5), sexo="M", nro_legajo=654321, fecha_ingreso=date(2021,1,1), dni= "na", libreta_civica="l", libreta_enrolamiento="aci", pasaporte="nacn")
+        alumno2 = self.__nuevoalumno(nombre="Pedro", apellido="Gómez", nrodocumento="12345678", tipo_documento=None, fecha_nacimiento=date(1995,5,5), sexo="M", nro_legajo=654321, fecha_ingreso=date(2021,1,1), sigla="LC", nombre_doc="Libreta Cívica")
         AlumnoService.crear(alumno1)
         AlumnoService.crear(alumno2)
         alumnos = AlumnoService.buscar_todos()
@@ -70,19 +72,14 @@ class AlumnoTestCase(unittest.TestCase):
         resultado = AlumnoService.buscar_por_id(alumno.id)
         self.assertIsNone(resultado)
 
-
-
-    def __nuevoalumno(self, nombre="Juan", apellido="Pérez", nrodocumento="46291002" ,tipo_documento=None, fecha_nacimiento=date(1990,1,1), sexo="M", nro_legajo=123456, fecha_ingreso=date(2020,1,1),
-                      dni= "nacnal", libreta_civica="nacional", libreta_enrolamiento="naci", pasaporte="nacnal"):
+    def __nuevoalumno(self, nombre="Juan", apellido="Pérez", nrodocumento="46291002", tipo_documento=None, fecha_nacimiento=date(1990,1,1), sexo="M", nro_legajo=123456, fecha_ingreso=date(2020,1,1), sigla="DNI", nombre_doc="Documento Nacional de Identidad"):
         tipo_documento = TipoDocumento()
-        tipo_documento.pasaporte = pasaporte
-        tipo_documento.dni = dni
-        tipo_documento.libreta_civica = libreta_civica
-        tipo_documento.libreta_enrolamiento = libreta_enrolamiento
+        tipo_documento.sigla = sigla
+        tipo_documento.nombre = nombre_doc
         TipoDocumentoService.crear(tipo_documento)
         
         alumno = Alumno()
-        alumno.nombre =  nombre
+        alumno.nombre =  nombre 
         alumno.apellido = apellido
         alumno.nrodocumento = nrodocumento
         alumno.tipo_documento = tipo_documento
