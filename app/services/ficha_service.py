@@ -9,7 +9,9 @@ class FichaService:
         self.alumno_repository = alumno_repository  # DIP
 
     def obtener_ficha(self, alumno_id: int) -> dict:
-        alumno = self.alumno_repository.obtener_por_id(alumno_id)
+        alumno = self.alumno_repository.buscar_por_id(alumno_id)
+        if alumno is None:
+            return None
         return {
             "nro_legajo": alumno.nro_legajo,
             "apellido": alumno.apellido,
@@ -19,7 +21,6 @@ class FichaService:
 
     def generar_pdf(self, alumno_id: int) -> bytes:
         ficha = self.obtener_ficha(alumno_id)
-
         buffer = BytesIO()
         doc = SimpleDocTemplate(buffer)
         styles = getSampleStyleSheet()
@@ -27,11 +28,16 @@ class FichaService:
 
         story.append(Paragraph("Ficha del Alumno", styles["Heading1"]))
         story.append(Spacer(1, 12))
-        for key, value in ficha.items():
-            story.append(Paragraph(f"<b>{key.capitalize()}:</b> {value}", styles["Normal"]))
-            story.append(Spacer(1, 8))
+        if ficha:
+            for key, value in ficha.items():
+                story.append(Paragraph(f"<b>{key.capitalize()}:</b> {value}", styles["Normal"]))
+                story.append(Spacer(1, 8))
+        else:
+            story.append(Paragraph("No se encontraron datos del alumno.", styles["Normal"]))
 
         doc.build(story)
         pdf_value = buffer.getvalue()
+        buffer.close()
+        return pdf_value
         buffer.close()
         return pdf_value

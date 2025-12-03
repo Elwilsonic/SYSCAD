@@ -2,6 +2,7 @@ from flask import Response, jsonify, Blueprint, request
 from app.mapping.alumno_mapping import AlumnoMapping
 from app.services.alumno_service import AlumnoService
 from app.services.ficha_service import FichaService
+from app.repositories.alumno_repositorio import AlumnoRepository
 
 alumno_bp = Blueprint('alumno', __name__)
 alumno_mapping = AlumnoMapping()
@@ -15,12 +16,20 @@ def buscar_todos():
 def ficha_alumno(alumno_id):
     formato = request.args.get("formato", "json")
 
+    alumno_repo= AlumnoRepository()
+    ficha_service= FichaService(alumno_repo)
+
     if formato == "json":
-        data = FichaService.obtener_ficha(alumno_id)
+        data = ficha_service.obtener_ficha(alumno_id)
+        if data is None:
+            return jsonify({"error": "Alumno no encontrado"}), 404
         return jsonify(data)
 
     elif formato == "pdf":
-        pdf_data = FichaService.generar_pdf(alumno_id)
+        data = ficha_service.obtener_ficha(alumno_id)
+        if data is None:
+            return jsonify({"error": "Alumno no encontrado"}), 404
+        pdf_data = ficha_service.generar_pdf(alumno_id)
         return Response(pdf_data, mimetype="application/pdf",
                         headers={"Content-Disposition": f"attachment;filename=ficha_alumno_{alumno_id}.pdf"})
     else:
